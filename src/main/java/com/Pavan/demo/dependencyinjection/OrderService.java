@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderService {
 
-    private final PaymentService paymentService;
+    PaymentService paymentService;
 
     // Constructor Injection
     public OrderService(PaymentService paymentService) {
@@ -13,7 +13,7 @@ public class OrderService {
     }
 
     public void placeOrder() {
-//        paymentService.Payment();
-//        System.out.println("Order placed");
+        paymentService.Payment();
+        System.out.println("Order placed");
     }
 }
