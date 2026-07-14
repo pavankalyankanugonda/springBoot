@@ -8,18 +8,16 @@ import org.springframework.context.ApplicationContext;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-		Student student = (Student) context.getBean("student");
+
+		ApplicationContext context =
+				SpringApplication.run(DemoApplication.class, args);
+
+		Student student = context.getBean(Student.class);
+
 		student.setName("Pavan");
 		student.setAge(21);
+
 		System.out.println("Name: " + student.getName());
 		System.out.println("Age: " + student.getAge());
-
-
-
-//		Student student = new Student("Teja", 21);
-//		System.out.println("Name: " + student.getName());
-//		System.out.println("Age: " + student.getAge());
 	}
 }
