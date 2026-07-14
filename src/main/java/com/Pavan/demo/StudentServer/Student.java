@@ -1,4 +1,4 @@
-package com.Pavan.demo.server.StudentServer;
+package com.Pavan.demo.StudentServer;
 
 public class Student {
     int id;
