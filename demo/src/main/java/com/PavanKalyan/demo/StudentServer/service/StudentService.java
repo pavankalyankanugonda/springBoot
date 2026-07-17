@@ -1,5 +1,7 @@
-package com.PavanKalyan.demo.StudentServer;
+package com.PavanKalyan.demo.StudentServer.service;
 
+import com.PavanKalyan.demo.StudentServer.entity.Student;
+import com.PavanKalyan.demo.StudentServer.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 @Service

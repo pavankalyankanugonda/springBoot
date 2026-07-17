@@ -9,7 +9,7 @@ public class OrderService {
     //    @Autowired
     PaymentService paymentService;
 
-    OrderService(PaymentService paymentService){
+    public OrderService(PaymentService paymentService){
         this.paymentService = paymentService;
     }
 

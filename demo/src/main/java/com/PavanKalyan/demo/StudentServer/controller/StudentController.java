@@ -1,5 +1,7 @@
-package com.PavanKalyan.demo.StudentServer;
+package com.PavanKalyan.demo.StudentServer.controller;
 
+import com.PavanKalyan.demo.StudentServer.entity.Student;
+import com.PavanKalyan.demo.StudentServer.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
