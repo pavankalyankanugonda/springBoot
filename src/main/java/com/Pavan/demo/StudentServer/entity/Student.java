@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Entity
 public class Student {
@@ -14,6 +16,8 @@ public class Student {
     private String name;
     private int age;
     private String department;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 
     public Student() {
     }
