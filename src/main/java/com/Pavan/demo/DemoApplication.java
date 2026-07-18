@@ -1,5 +1,6 @@
 package com.Pavan.demo;
 
+import com.Pavan.demo.StudentServer.entity.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
