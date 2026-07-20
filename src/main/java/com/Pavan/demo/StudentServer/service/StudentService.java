@@ -25,10 +25,6 @@ public class StudentService {
             return null;
         }
 
-        if (student.getId() <= 0) {
-            return null;
-        }
-
         if (student.getName() == null || student.getName().trim().isEmpty()) {
             return null;
         }
@@ -52,12 +48,29 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
+    // GET ALL
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
     // UPDATE
     public Student updateStudent(Integer id, Student updatedStudent) {
 
         Student existingStudent = studentRepository.findById(id).orElse(null);
 
         if (existingStudent == null) {
+            return null;
+        }
+
+        if (updatedStudent.getName() == null || updatedStudent.getName().trim().isEmpty()) {
+            return null;
+        }
+
+        if (updatedStudent.getAge() <= 0) {
+            return null;
+        }
+
+        if (updatedStudent.getDepartment() == null || updatedStudent.getDepartment().trim().isEmpty()) {
             return null;
         }
 
@@ -78,13 +91,8 @@ public class StudentService {
             return "Student Not Found";
         }
 
-        studentRepository.deleteById(id);
+        studentRepository.delete(existingStudent);
 
         return "Student Deleted Successfully";
-    }
-
-    // GET ALL
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
     }
 }

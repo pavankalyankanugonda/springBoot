@@ -1,39 +1,47 @@
 package com.Pavan.demo.StudentServer.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
 @Entity
+@Table(name = "students")
 public class Student {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    @Column(nullable = false)
     private String name;
-    private int age;
+
+    @Column(nullable = false)
+    private Integer age;
+
+    @Column(nullable = false)
     private String department;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
     public Student() {
     }
 
-    public Student(int id, String name, int age, String department) {
+    public Student(Integer id, String name, Integer age, String department) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.department = department;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,11 +53,11 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
