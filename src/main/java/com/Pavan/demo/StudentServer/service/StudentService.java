@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -17,21 +18,73 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
+    // CREATE
     public Student validateStudent(Student student) {
 
-        int id = student.getId();
-        String name = student.getName();
-        int age = student.getAge();
-        String department = student.getDepartment();
-
-        if (id < 0 || name == null || name.isBlank()
-                || age < 0
-                || department == null || department.isBlank()) {
+        if (student == null) {
             return null;
         }
+
+        if (student.getId() <= 0) {
+            return null;
+        }
+
+        if (student.getName() == null || student.getName().trim().isEmpty()) {
+            return null;
+        }
+
+        if (student.getAge() <= 0) {
+            return null;
+        }
+
+        if (student.getDepartment() == null || student.getDepartment().trim().isEmpty()) {
+            return null;
+        }
+
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
 
         return studentRepository.save(student);
+    }
+
+    // GET BY ID
+    public Student getStudentById(Integer id) {
+        return studentRepository.findById(id).orElse(null);
+    }
+
+    // UPDATE
+    public Student updateStudent(Integer id, Student updatedStudent) {
+
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+
+        if (existingStudent == null) {
+            return null;
+        }
+
+        existingStudent.setName(updatedStudent.getName());
+        existingStudent.setAge(updatedStudent.getAge());
+        existingStudent.setDepartment(updatedStudent.getDepartment());
+        existingStudent.setUpdatedAt(LocalDateTime.now());
+
+        return studentRepository.save(existingStudent);
+    }
+
+    // DELETE
+    public String deleteStudentById(Integer id) {
+
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+
+        if (existingStudent == null) {
+            return "Student Not Found";
+        }
+
+        studentRepository.deleteById(id);
+
+        return "Student Deleted Successfully";
+    }
+
+    // GET ALL
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
     }
 }
