@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -19,23 +18,23 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    // CREATE
+    // CREATE STUDENT
     public Student validateStudent(Student student) {
 
         if (student == null) {
-            return null;
+            throw new RuntimeException("Student object cannot be null");
         }
 
         if (student.getName() == null || student.getName().trim().isEmpty()) {
-            return null;
+            throw new RuntimeException("Student name cannot be empty");
         }
 
         if (student.getAge() <= 0) {
-            return null;
+            throw new RuntimeException("Age must be greater than 0");
         }
 
         if (student.getDepartment() == null || student.getDepartment().trim().isEmpty()) {
-            return null;
+            throw new RuntimeException("Department cannot be empty");
         }
 
         student.setCreatedAt(LocalDateTime.now());
@@ -44,38 +43,35 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    // GET BY ID
+    // GET STUDENT BY ID
     public Student getStudentById(Integer id) {
 
-        //return studentRepository.findById(id).orElse(null);
-        Optional<Student> student = studentRepository.findById(id);
-        return student.get();
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student Not Found"));
     }
 
-    // GET ALL
+    // GET ALL STUDENTS
     public List<Student> getAllStudents() {
+
         return studentRepository.findAll();
     }
 
-    // UPDATE
+    // UPDATE STUDENT
     public Student updateStudent(Integer id, Student updatedStudent) {
 
-        Student existingStudent = studentRepository.findById(id).orElse(null);
-
-        if (existingStudent == null) {
-            return null;
-        }
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student Not Found"));
 
         if (updatedStudent.getName() == null || updatedStudent.getName().trim().isEmpty()) {
-            return null;
+            throw new RuntimeException("Student name cannot be empty");
         }
 
         if (updatedStudent.getAge() <= 0) {
-            return null;
+            throw new RuntimeException("Age must be greater than 0");
         }
 
         if (updatedStudent.getDepartment() == null || updatedStudent.getDepartment().trim().isEmpty()) {
-            return null;
+            throw new RuntimeException("Department cannot be empty");
         }
 
         existingStudent.setName(updatedStudent.getName());
@@ -86,14 +82,11 @@ public class StudentService {
         return studentRepository.save(existingStudent);
     }
 
-    // DELETE
+    // DELETE STUDENT
     public String deleteStudentById(Integer id) {
 
-        Student existingStudent = studentRepository.findById(id).orElse(null);
-
-        if (existingStudent == null) {
-            return "Student Not Found";
-        }
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student Not Found"));
 
         studentRepository.delete(existingStudent);
 

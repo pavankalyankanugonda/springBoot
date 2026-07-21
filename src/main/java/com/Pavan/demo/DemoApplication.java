@@ -18,6 +18,7 @@ public class DemoApplication {
 		student.setName("Pavan");
 		student.setAge(21);
 
+
 		System.out.println("Name: " + student.getName());
 		System.out.println("Age: " + student.getAge());
 	}

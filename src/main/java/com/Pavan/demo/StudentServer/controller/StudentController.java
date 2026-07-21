@@ -32,8 +32,8 @@ public class StudentController {
 
     // 2. GET STUDENT BY ID
     @GetMapping("/getStudent/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable Integer id) {
-
+    //public ResponseEntity<?> getStudentById(@PathVariable Integer id) {
+    public ResponseEntity<?> getStudentById(@PathVariable int id) throws Exception {
         Student student = studentService.getStudentById(id);
 
         if (student == null) {
