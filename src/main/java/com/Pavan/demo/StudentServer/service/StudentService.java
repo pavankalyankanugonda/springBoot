@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -45,7 +46,10 @@ public class StudentService {
 
     // GET BY ID
     public Student getStudentById(Integer id) {
-        return studentRepository.findById(id).orElse(null);
+
+        //return studentRepository.findById(id).orElse(null);
+        Optional<Student> student = studentRepository.findById(id);
+        return student.get();
     }
 
     // GET ALL
